@@ -15,7 +15,7 @@ public class Deck {
 		case CARDS_52:
 			for (Suit suit : Suit.values()) {
 				for (int i = 2; i <= 14; i++) {
-					getDeck().add(new Card(suit, i));
+					getCards().add(new Card(suit, i));
 				}
 			}
 			break;
@@ -24,10 +24,10 @@ public class Deck {
 	}
 
 	public void shuffle() {
-		Collections.shuffle(getDeck());
+		Collections.shuffle(getCards());
 	}
 
-	public List<Card> getDeck() {
+	public List<Card> getCards() {
 		return deck;
 	}
 

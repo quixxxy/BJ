@@ -2,7 +2,6 @@ package com.quixxxy.bj.engine.console;
 
 import java.util.Scanner;
 
-import com.quixxxy.bj.engine.Engine;
 
 public class ConsoleEngine extends Engine {
 

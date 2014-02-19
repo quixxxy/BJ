@@ -11,10 +11,10 @@ public class TableTest {
 	public void testDeal() {
 		Table table = new Table();
 
-		table.dealToAll();
+		table.dealToAllBoxes();
 		Assert.assertEquals(50, table.getShoe().size());
 
-		table.dealToAll();
+		table.dealToAllBoxes();
 		Assert.assertEquals(48, table.getShoe().size());
 	}
 
@@ -37,4 +37,15 @@ public class TableTest {
 		Assert.assertEquals(3, table.getPlayerBoxes().size());
 		Assert.assertEquals(208, table.getShoe().size());
 	}
+	
+	@Test
+    public void testShoeEnds() {
+	    Table table = new Table();
+	    Assert.assertFalse(table.isShoeEnds());
+	    for (int i = 0; i < 20; i++) {
+	        table.dealToAllBoxes();
+	    }
+	    Assert.assertTrue(table.isShoeEnds());
+	}
+
 }

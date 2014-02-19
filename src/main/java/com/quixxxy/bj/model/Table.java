@@ -1,12 +1,12 @@
 package com.quixxxy.bj.model;
 
+import com.quixxxy.bj.model.Deck.DeckType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
-
-import com.quixxxy.bj.model.Deck.DeckType;
 
 public class Table {
 
@@ -19,36 +19,52 @@ public class Table {
 	}
 
 	public Table(int boxCount, int decksCount) {
-		// add players
 		for (int i = 0; i < boxCount; i++) {
 			playerBoxes.add(new Box());
 		}
 		dealerBox = new DealerBox();
 
-		// add cards
 		for (int i = 0; i < decksCount; i++) {
-			shoe.addAll(new Deck(DeckType.CARDS_52).getDeck());
+			shoe.addAll(new Deck(DeckType.CARDS_52).getCards());
 		}
 	}
+	
+    public Table(int boxCount, Stack<Card> shoe) {
+        for (int i = 0; i < boxCount; i++) {
+            playerBoxes.add(new Box());
+        }
+        dealerBox = new DealerBox();
+        this.shoe = shoe;
+    }
 
-	public void dealToAll() {
-		for (Box playerBox : playerBoxes) {
-			dealToBox(playerBox);
-		}
+    public void dealToAllBoxes() {
+	    dealToPlayerBoxes();
 		dealToBox(dealerBox);
+	}
+	
+	public void dealToPlayerBoxes() {
+	    for (Box playerBox : playerBoxes) {
+            dealToBox(playerBox);
+        }
 	}
 
 	public void dealToBox(Box box) {
-		if (!shoe.isEmpty()) {
+		if (!isShoeEnds()) {
 			box.addCard(shoe.pop());
+		} else {
+		    throw new IllegalStateException("Number of cards in shoe exceed their limit");
 		}
 	}
 
-	public void dealToDealer() {
-		while (!dealerBox.isEnough() || dealerBox.isBurned()) {
+	public void dealCardsToDealer() {
+		while (!dealerBox.isEnough() && !dealerBox.isBurned()) {
 			dealToBox(dealerBox);
 		}
 	}
+	
+    public boolean isShoeEnds() {
+        return shoe.size() < 1;
+    }
 
 	@Override
 	public String toString() {

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Box implements Comparable<Box> {
 
-	private List<Card> cards = new ArrayList<Card>();
+	protected List<Card> cards = new ArrayList<Card>();
 
 	public int getScore() {
 		int score = 0;
