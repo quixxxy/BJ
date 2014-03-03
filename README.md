@@ -1,4 +1,4 @@
-BJ simple
+123BJ simple
 ==
 
-BlackJack simple
+123BlackJack simple
